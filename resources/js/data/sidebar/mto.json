@@ -1,0 +1,17 @@
+[
+  {
+    "label": "Dashboard",
+    "icon": "home",
+    "link": "/dashboard"
+  },
+  {
+    "label": "Payments History",
+    "icon": "payments",
+    "link": "/payments-history"
+  },
+  {
+    "label": "Documents",
+    "icon": "requirements",
+    "link": "/documents"
+  }
+]

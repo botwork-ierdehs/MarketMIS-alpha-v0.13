@@ -1,0 +1,1 @@
+import{_ as e}from"./_plugin-vue_export-helper-DlAUqK2U.js";import{d as t,o}from"./app-BT8JCygI.js";const r={},s={class:"py-5 font-bold text-center text-sm text-white dark:text-white bg-btn-gradient"};function c(n,_){return o(),t("footer",s," MarketMIS © 2025. All rights reserved. ")}const f=e(r,[["render",c],["__file","Footer.vue"]]);export{f as F};

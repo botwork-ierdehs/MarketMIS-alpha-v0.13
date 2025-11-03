@@ -1,0 +1,22 @@
+[
+  {
+    "label": "Dashboard",
+    "icon": "home",
+    "link": "/dashboard"
+  },
+  {
+    "label": "Applications",
+    "icon": "applications",
+    "link": "/applications"
+  },
+  {
+    "label": "Inspections",
+    "icon": "inspectors",
+    "link": "/inspections"
+  },
+  {
+    "label": "Documents",
+    "icon": "requirements",
+    "link": "/documents"
+  }
+]

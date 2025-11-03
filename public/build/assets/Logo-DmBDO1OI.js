@@ -1,0 +1,1 @@
+import{_ as o}from"./_plugin-vue_export-helper-DlAUqK2U.js";import{d as s,o as t}from"./app-BT8JCygI.js";const e="/build/assets/market-MIS-logo-BrcBaPkP.png",c={},r={class:"h-30 w-auto",src:e,alt:""};function _(a,n){return t(),s("img",r)}const l=o(c,[["render",_],["__file","Logo.vue"]]);export{l as L};

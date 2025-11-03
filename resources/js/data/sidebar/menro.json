@@ -1,0 +1,17 @@
+[
+  {
+    "label": "Dashboard",
+    "icon": "home",
+    "link": "/dashboard"
+  },
+  {
+    "label": "Applications",
+    "icon": "applications",
+    "link": "/applications"
+  },
+  {
+    "label": "Documents",
+    "icon": "requirements",
+    "link": "/documents"
+  }
+]

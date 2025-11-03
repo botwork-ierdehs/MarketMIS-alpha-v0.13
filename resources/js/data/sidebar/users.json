@@ -1,0 +1,24 @@
+[
+  {
+    "label": "My Rentals",
+    "icon": "applications",
+    "link": "/my-rentals",
+    "children": [
+      {
+        "label": "Stall Leasing",
+        "icon": "stalls",
+        "link": "/my-rentals/stall-leasing"
+      },
+      {
+        "label": "Table Spaces",
+        "icon": "table",
+        "link": "/my-rentals/table-spaces"
+      },
+      {
+        "label": "Market Volante",
+        "icon": "volante-type",
+        "link": "/my-rentals/market-volante"
+      }
+    ]
+  }
+]

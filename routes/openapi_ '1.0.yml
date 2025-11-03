@@ -1,0 +1,681 @@
+openapi: 3.0.3
+info:
+  title: MARKET IS
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000/api
+
+paths:
+  /register:
+    post:
+      summary: Register new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterUser'
+      responses:
+        '200':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Email Alread Exist
+  /login:
+    post:
+      summary: Login 
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginPayload'
+      responses:
+        '200':
+          description: Successfully Login
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid input
+  /business-permit:
+    post:
+      summary: Apply Business Permit 
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BusinessPermitPayloadRented'
+      responses:
+        '200 Rented':
+          description: Successfully Business Permit
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessPermitResponse'
+        '400':
+          description: Invalid input
+  /volante-permit:
+    post:
+      summary: Apply Volante Permit 
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VolantePermitPayload'
+      responses:
+        '200':
+          description: Successfully Business Permit
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolantePermitResponse'
+        '400':
+          description: Invalid input
+  /stall-rental-permit:
+    post:
+      summary: Apply Stall Rental Permit 
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StallRentalPayload'
+      responses:
+        '200':
+          description: Successfully Business Permit
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StallRentalPermitResponse'
+        '400':
+          description: Invalid input
+components:
+  schemas:
+    RegisterUser:
+      type: object
+      required:
+        - name
+        - email
+      properties:
+        first_name:
+          type: string
+        middle_name:
+          type: string
+        last_name:
+          type: string
+        role_id:
+          type: number
+        gender_id:
+          type: number
+        email:
+          type: string
+          format: email
+        mobile:
+          type: string
+        address:
+          type: string
+        birthday:
+          type: string
+        password:
+          type: string
+        password_confirmation:
+          type: string
+        terms:
+          type: boolean
+    LoginPayload:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+    BusinessPermitPayloadRented:
+      type: object
+      properties:
+        user_id:
+          type: number
+          example: 2
+        name:
+          type: string
+          example: John Doe
+        trade_or_franchise_name:
+          type: string
+          example: "Doe's Hardware"
+        business_address:
+          type: string
+          example: 123 Main Street, Cityville
+        business_phone:
+          type: string
+          example: +63 912 345 6789
+        business_email:
+          type: string
+          format: email
+          example: "user@example.com"
+        business_telephone:
+          type: string
+          example: "(02) 1234-5678"
+        area_of_sqr_meter:
+          type: string
+          example: "150"
+          #form details
+        business_mode:
+          type: number
+          example: 1 # e.g., 1 = Sole Proprietorship
+        business_type:
+          type: number
+          example: 2  # e.g., 2 = Retail
+        business_ammendment:
+          type: object
+          properties:
+            from:
+              type: string
+              example: "Single"
+            to:
+              type: string
+              example: "Single"              
+        is_enjoying_tax_incentives:
+          type: boolean
+        is_enjoying_tax_incentives_no_reason:
+          type: string #is_enjoying_tax_incentives falls = null 
+          example: "Registered under PEZA incentives"
+        isRented:
+          type: boolean
+          example: true
+        #isRented true
+        lessorDetails:
+          type: string
+          example: "Maria Santos, 456 Rizal Ave, Cityville"
+        line_of_business:
+          type: string
+          example: "Hardware and Construction Supplies"
+        no_of_units:
+          type: string
+          example:  "2"
+        capitalization:
+          type: number
+          example: "500000"
+        gross:
+          type: number 
+          example: 1200000
+          # permit details                
+        issued_date:
+          type: string
+          example: "2025-01-15"
+        expiry_date:
+          type: string
+          example: "2026-01-14"
+          #requirements
+        requirement_checklist_id:
+          type: number
+          example: 2
+        attachment:
+          type: string
+          example: business_permit_2025.pdf
+          #payments
+        permit_type:
+          type: number
+          example: 1
+        reference_number: 
+          type: string
+          example: null
+        amount: 
+          type: number
+          example: 1000
+    VolantePermitPayload:
+      type: object
+      properties:
+        user_id:
+          type: number
+        permit_id:
+          type: number
+        volante_category_id:
+          type: number
+        name:
+          type: string
+        location:
+          type: string
+        fee:
+          type: number
+        duration:
+          type: number
+        started_date:
+          type: string
+        end_date:
+          type: string
+    StallRentalPayload:
+      type: object
+      properties:
+        user_id:
+          type: number
+        permit_id:
+          type: number
+        stall_id:
+          type: number
+        location:
+          type: string
+        status:
+          type: number
+        started_date:
+          type: string
+        end_date:
+          type: string
+# responses:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        first_name:
+          type: string
+        middle_name:
+          type: string
+        last_name:
+          type: string
+        role_id:
+          type: number
+        gender_id:
+          type: number
+        email:
+          type: string
+          format: email
+        mobile:
+          type: string
+        address:
+          type: string
+        birthday:
+          type: string
+        password:
+          type: string
+        password_confirmation:
+          type: string
+        terms:
+          type: boolean
+    BusinessPermitResponse:
+      type: object
+      properties:
+        id:
+          type: number
+        user_id:
+          type: number
+        permit_id:
+          type: number
+        name:
+          type: string
+        trade_or_franchise_name:
+          type: string
+        business_address:
+          type: string
+        business_phone:
+          type: string
+        business_email:
+          type: string
+          format: email
+        business_telephone:
+          type: string
+        area_of_sqr_meter:
+          type: string
+        permitDetails:
+          type: object
+          properties:
+              id: 
+                type: number
+              requirement_id:
+                type: number
+                example: 1
+              form_detail_id:
+                type: number
+                example: 1
+              type:
+                type: number  
+                example: B              
+              status:
+                type: number 
+                example: 1                
+              issued_date:
+                type: string
+                example: "2025-01-15"
+              expiry_date:
+                type: string
+                example: "2026-01-14"
+              requirements:
+                type: object
+                properties:
+                  id: 
+                    type: number
+                  requirement_checklist_id:
+                    type: number
+                    example: 1
+                  attachment:
+                    type: string
+                    example: business_permit_2025.pdf
+                  requirementDetails:
+                    type: object
+                    properties:
+                      id: 
+                        type: number
+                        example: 1
+                      name:
+                        type: number
+                        example: Barangay Clearance
+              formDetails:
+                type: object
+                properties:
+                  business_mode:
+                    type: number
+                    example: 1 # e.g., 1 = Sole Proprietorship
+                  business_type:
+                    type: number
+                    example: 2  # e.g., 2 = Retail
+                  business_ammendment:
+                    type: object
+                    properties:
+                      from:
+                        type: string
+                        example: "Single"
+                      to:
+                        type: string
+                        example: "Single"              
+                  is_enjoying_tax_incentives:
+                    type: boolean
+                  is_enjoying_tax_incentives_no_reason:
+                    type: string #is_enjoying_tax_incentives falls = null 
+                    example: "Registered under PEZA incentives"
+                  isRented:
+                    type: boolean
+                    example: true
+                  #isRented true
+                  lessorDetails:
+                    type: string
+                    example: "Maria Santos, 456 Rizal Ave, Cityville"
+                  line_of_business:
+                    type: string
+                    example: "Hardware and Construction Supplies"
+                  no_of_units:
+                    type: string
+                    example:  "2"
+                  capitalization:
+                    type: number
+                    example: "500000"
+                  gross:
+                    type: number 
+                    example: 1200000
+        userDetails:
+          type: object
+          properties:
+            id: 
+              type: number
+              example: 1
+            roles:
+              type: object
+              properties:
+                id: 
+                  type: number
+                  example: 3
+                name:
+                  type: string
+                  example: User
+            gender:
+              type: object
+              properties:
+                id: 
+                  type: number
+                  example: 1
+                name:
+                  type: string
+                  example: Male           
+            userType:
+              type: object
+              properties:
+                id: 
+                  type: number
+                  example: 1
+                name:
+                  type: string   
+            first_name: 
+              type: string
+            middle_name: 
+              type: string
+            last_name: 
+              type: string
+            birthday: 
+              type: string
+            address: 
+              type: string
+            mobile: 
+              type: string
+            email:
+              type: string
+              format: email
+    VolantePermitResponse:
+      type: object
+      properties:
+        id:
+          type: number
+        permit_id:
+          type: number
+        volante_category_id:
+          type: number
+        name:
+          type: string
+        location:
+          type: string
+        fee:
+          type: number
+        duration:
+          type: number
+        started_date:
+          type: string
+        end_date:
+          type: string
+        volanteCategories:
+          type: object
+          properties:
+            id: 
+              type: number
+            name:
+              type: string   
+        userDetails:
+          type: object
+          properties:
+            id: 
+              type: number
+            roles:
+              type: object
+              properties:
+                id: 
+                  type: number
+                name:
+                  type: string
+            gender:
+              type: object
+              properties:
+                id: 
+                  type: number
+                name:
+                  type: string            
+            userType:
+              type: object
+              properties:
+                id: 
+                  type: number
+                name:
+                  type: string   
+            first_name: 
+              type: string
+            middle_name: 
+              type: string
+            last_name: 
+              type: string
+            birthday: 
+              type: string
+            address: 
+              type: string
+            mobile: 
+              type: string
+            status: 
+              type: boolean
+            email:
+              type: string
+              format: email
+            email_verified_at:
+              type: string
+            password:
+              type: string
+        permitDetails:
+          type: object
+          properties:
+              id: 
+                type: number
+              requirement_id:
+                type: number
+              type:
+                type: number                
+              status:
+                type: number                 
+              issued_date:
+                type: string
+              expiry_date:
+                type: string
+              requirements:
+                type: object
+                properties:
+                  id: 
+                    type: number
+                  requirement_checklist_id:
+                    type: number
+                  attachment:
+                    type: number
+                  requirementDetails:
+                    type: object
+                    properties:
+                      id: 
+                        type: number
+                      name:
+                        type: number
+    StallRentalPermitResponse:
+      type: object
+      properties:
+        id:
+          type: number
+        permit_id:
+          type: number
+        name:
+          type: string
+        location:
+          type: string
+        fee:
+          type: number
+        duration:
+          type: number
+        started_date:
+          type: string
+        end_date:
+          type: string
+        stalls:
+          type: object
+          properties:
+            id: 
+              type: number
+            stallCategory:
+              type: object
+              properties:
+                id: 
+                  type: number
+                name:
+                  type: string   
+            area_of_sqr_meter: 
+              type: string
+            size: 
+              type: string
+            location: 
+              type: string
+            monthlyRate: 
+              type: number
+            status: 
+              type: number
+        userDetails:
+          type: object
+          properties:
+            id: 
+              type: number
+            roles:
+              type: object
+              properties:
+                id: 
+                  type: number
+                name:
+                  type: string
+            gender:
+              type: object
+              properties:
+                id: 
+                  type: number
+                name:
+                  type: string            
+            userType:
+              type: object
+              properties:
+                id: 
+                  type: number
+                name:
+                  type: string   
+            first_name: 
+              type: string
+            middle_name: 
+              type: string
+            last_name: 
+              type: string
+            birthday: 
+              type: string
+            address: 
+              type: string
+            mobile: 
+              type: string
+            status: 
+              type: boolean
+            email:
+              type: string
+              format: email
+            email_verified_at:
+              type: string
+            password:
+              type: string
+        permitDetails:
+          type: object
+          properties:
+              id: 
+                type: number
+              requirement_id:
+                type: number
+              type:
+                type: number                
+              status:
+                type: number                 
+              issued_date:
+                type: string
+              expiry_date:
+                type: string
+              requirements:
+                type: object
+                properties:
+                  id: 
+                    type: number
+                  requirement_checklist_id:
+                    type: number
+                  attachment:
+                    type: number
+                  requirementDetails:
+                    type: object
+                    properties:
+                      id: 
+                        type: number
+                      name:
+                        type: number

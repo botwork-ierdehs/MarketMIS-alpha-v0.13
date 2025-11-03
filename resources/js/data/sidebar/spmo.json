@@ -1,0 +1,17 @@
+[
+  {
+    "label": "Dashboard",
+    "icon": "home",
+    "link": "/dashboard"
+  },
+  {
+    "label": "Assigned Applications",
+    "icon": "applications",
+    "link": "/assigned-applications"
+  },
+  {
+    "label": "Compliance Checklist",
+    "icon": "requirements",
+    "link": "/compliance-checklist"
+  }
+]

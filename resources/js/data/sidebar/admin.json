@@ -1,0 +1,68 @@
+[
+  {
+    "label": "Dashboard",
+    "icon": "home",
+    "link": "/admin/dashboard"
+  },
+  {
+    "label": "Users",
+    "icon": "usersList",
+    "link": "/users",
+    "children": [
+      {
+        "label": "Vendors",
+        "icon": "vendor",
+        "link": "/admin/users?role=vendor"
+      },
+      {
+        "label": "Admins",
+        "icon": "sub-admin",
+        "link": "/admin/users?role=sub-admin"
+      }
+    ]
+  },
+  {
+    "label": "Rental Management",
+    "icon": "applications",
+    "link": "/admin/rental-management",
+    "children": [
+      {
+        "label": "Stall Leasing",
+        "icon": "stalls",
+        "link": "/admin/rental-management/stall-leasing"
+      },
+      {
+        "label": "Table Spaces",
+        "icon": "table",
+        "link": "/admin/rental-management/table-spaces"
+      },
+            {
+        "label": "Market Volante",
+        "icon": "volante-type",
+        "link": "/admin/rental-management/market-volante"
+      }
+    ]
+  },
+  {
+    "label": "System Setting",
+    "icon": "settings",
+    "link": "/admin/system-setting",
+    "children": [
+      {
+        "label": "Rental Space",
+        "icon": "stalls",
+        "link": "/admin/system-setting/rental-space"
+      },
+      {
+        "label": "Fees Masterlist",
+        "icon": "fees",
+        "link": "/admin/system-setting/fees"
+      },
+      {
+        "label": "Requirements List",
+        "icon": "requirements",
+        "link": "/admin/system-setting/requirements"
+      }
+    ]
+  }
+]

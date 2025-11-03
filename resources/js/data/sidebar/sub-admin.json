@@ -1,0 +1,29 @@
+[
+  {
+    "label": "Dashboard",
+    "icon": "home",
+    "link": "/department/dashboard"
+  },
+  {
+    "label": "Applications",
+    "icon": "applications",
+    "link": "/department/applications",
+    "children": [
+      {
+        "label": "Stall Leasing",
+        "icon": "stalls",
+        "link": "/department/applications/stall-leasing"
+      },
+      {
+        "label": "Table Spaces",
+        "icon": "table",
+        "link": "/department/applications/table-spaces"
+      },
+            {
+        "label": "Market Volante",
+        "icon": "volante-type",
+        "link": "/department/applications/market-volante"
+      }
+    ]
+  }
+]

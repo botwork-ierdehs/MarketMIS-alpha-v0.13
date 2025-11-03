@@ -1,0 +1,17 @@
+[
+  {
+    "label": "Dashboard",
+    "icon": "home",
+    "link": "/dashboard"
+  },
+  {
+    "label": "Inspectors",
+    "icon": "inspectors",
+    "link": "/inspectors"
+  },
+  {
+    "label": "Documents",
+    "icon": "requirements",
+    "link": "/documents"
+  }
+]

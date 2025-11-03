@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Permit Form with Renewal Options</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 16px;
+            text-align: center;
+            background: #f8f9fa;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tab.active {
+            background: white;
+            color: #2563eb;
+        }
+        
+        .tab-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .tab.active .tab-icon {
+            background: #2563eb;
+            color: white;
+        }
+        
+        .form-content {
+            padding: 24px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            flex: 1;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: #374151;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        
+        .transient-details {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+        
+        .transient-details h3 {
+            color: #3b82f6;
+            margin-bottom: 16px;
+            font-size: 16px;
+        }
+        
+        .detail-item {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        .fees-section {
+            margin-top: 16px;
+        }
+        
+        .fees-section h4 {
+            color: #3b82f6;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .fees-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .fees-list li {
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
+        
+        .renewal-section {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+        
+        .renewal-section h4 {
+            color: #0284c7;
+            margin-bottom: 12px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .renewal-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .renewal-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+        
+        .renewal-option input[type="radio"] {
+            width: auto;
+        }
+        
+        .button-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 32px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        
+        .btn-cancel {
+            background: transparent;
+            color: #dc2626;
+        }
+        
+        .btn-cancel:hover {
+            background: #fee2e2;
+        }
+        
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+            border: 1px solid #d1d5db;
+        }
+        
+        .btn-secondary:hover {
+            background: #e5e7eb;
+        }
+        
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .version-label {
+            background: #10b981;
+            color: white;
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-left: 16px;
+        }
+        
+        .version-container {
+            margin-bottom: 32px;
+        }
+        
+        .version-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #374151;
+        }
+        
+        @media (max-width: 480px) {
+            .form-row {
+                flex-direction: column;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .button-row {
+                flex-direction: column;
+                gap: 16px;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="tabs">
+            <div class="tab active">
+                <div class="tab-icon">👤</div>
+                <span>Business Info</span>
+            </div>
+            <div class="tab">
+                <div class="tab-icon">📋</div>
+                <span>Requirements</span>
+            </div>
+            <div class="tab">
+                <div class="tab-icon">💳</div>
+                <span>Payment</span>
+            </div>
+        </div>
+        
+        <div class="form-content">
+            <div class="version-container">
+                <div class="version-title">
+                    Option 1: Renewal in Transient Details
+                    <span class="version-label">RECOMMENDED</span>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Business Name</label>
+                    <input type="text" value="Isdaan">
+                </div>
+                <div class="form-group">
+                    <label>Stall</label>
+                    <select>
+                        <option>Fish Market B (For vendors selling pork...)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="transient-details">
+                <h3>Transient Details</h3>
+                <div class="detail-item">
+                    <span class="detail-label">Name:</span> Fish Market B
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Size:</span> 180
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Coordinates:</span> Longitude-15, Latitude-12
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Category:</span> Meat Section
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Description:</span> For vendors selling pork, beef, or other meat cuts
+                </div>
+                
+                <div class="fees-section">
+                    <h4>Fees:</h4>
+                    <ul class="fees-list">
+                        <li><strong>One Time Clearance Fee:</strong> ₱20.00</li>
+                        <li><strong>Fee per Table:</strong> ₱500.00 per month</li>
+                        <li><strong>Occupancy Permit Fee:</strong> ₱10.00 per day</li>
+                    </ul>
+                </div>
+                
+                <div class="renewal-section">
+                    <h4>🔄 Auto-Renewal Options</h4>
+                    <div class="renewal-options">
+                        <div class="renewal-option">
+                            <input type="radio" id="no-renewal" name="renewal" value="none" checked>
+                            <label for="no-renewal">No auto-renewal</label>
+                        </div>
+                        <div class="renewal-option">
+                            <input type="radio" id="monthly" name="renewal" value="monthly">
+                            <label for="monthly">Auto-renew monthly (₱500.00/month)</label>
+                        </div>
+                        <div class="renewal-option">
+                            <input type="radio" id="quarterly" name="renewal" value="quarterly">
+                            <label for="quarterly">Auto-renew quarterly (₱1,400.00 - 7% discount)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Start Date</label>
+                    <input type="date" value="2025-02-09">
+                </div>
+                <div class="form-group">
+                    <label>End Date</label>
+                    <input type="date" value="2025-02-10">
+                </div>
+            </div>
+            
+            <div class="button-row">
+                <button class="btn btn-cancel">Cancel</button>
+                <div class="button-group">
+                    <button class="btn btn-primary">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container" style="margin-top: 40px;">
+        <div class="tabs">
+            <div class="tab active">
+                <div class="tab-icon">👤</div>
+                <span>Business Info</span>
+            </div>
+            <div class="tab">
+                <div class="tab-icon">📋</div>
+                <span>Requirements</span>
+            </div>
+            <div class="tab">
+                <div class="tab-icon">💳</div>
+                <span>Payment</span>
+            </div>
+        </div>
+        
+        <div class="form-content">
+            <div class="version-container">
+                <div class="version-title">Option 2: Renewal Button with Next</div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Business Name</label>
+                    <input type="text" value="Isdaan">
+                </div>
+                <div class="form-group">
+                    <label>Stall</label>
+                    <select>
+                        <option>Fish Market B (For vendors selling pork...)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="transient-details">
+                <h3>Transient Details</h3>
+                <div class="detail-item">
+                    <span class="detail-label">Name:</span> Fish Market B
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Size:</span> 180
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Coordinates:</span> Longitude-15, Latitude-12
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Category:</span> Meat Section
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Description:</span> For vendors selling pork, beef, or other meat cuts
+                </div>
+                
+                <div class="fees-section">
+                    <h4>Fees:</h4>
+                    <ul class="fees-list">
+                        <li><strong>One Time Clearance Fee:</strong> ₱20.00</li>
+                        <li><strong>Fee per Table:</strong> ₱500.00 per month</li>
+                        <li><strong>Occupancy Permit Fee:</strong> ₱10.00 per day</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Start Date</label>
+                    <input type="date" value="2025-02-09">
+                </div>
+                <div class="form-group">
+                    <label>End Date</label>
+                    <input type="date" value="2025-02-10">
+                </div>
+            </div>
+            
+            <div class="button-row">
+                <button class="btn btn-cancel">Cancel</button>
+                <div class="button-group">
+                    <button class="btn btn-secondary">🔄 Setup Renewal</button>
+                    <button class="btn btn-primary">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -47,7 +47,7 @@ const submit = () => {
         </div>
 
         <!-- Form -->
-        <form @submit.prevent="submit">
+        <form @submit.prevent="form.post(route('login'))">
         <!-- Email -->
         <div>
           <InputLabel for="email" value="Email" />
